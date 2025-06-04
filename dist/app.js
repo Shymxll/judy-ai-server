@@ -1,35 +1,40 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Express application setup
  */
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const morgan = require('morgan');
-const path = require('path');
-const errorHandler = require('./middleware/errorHandler');
-const notFoundHandler = require('./middleware/notFoundHandler');
-const routes = require('./routes');
+const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
+const helmet_1 = __importDefault(require("helmet"));
+const morgan_1 = __importDefault(require("morgan"));
+const path_1 = __importDefault(require("path"));
+const errorHandler_1 = __importDefault(require("./middleware/errorHandler"));
+// Eğer notFoundHandler yoksa, aşağıdaki satırı yorum satırı yapabilirsin.
+// import notFoundHandler from './middleware/notFoundHandler';
+const routes_1 = __importDefault(require("./routes"));
 // Initialize express app
-const app = express();
+const app = (0, express_1.default)();
 // Middleware
-app.use(helmet()); // Security headers
-app.use(cors()); // CORS support
-app.use(morgan('dev')); // Request logging
-app.use(express.json()); // Parse JSON requests
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded requests
+app.use((0, helmet_1.default)()); // Security headers
+app.use((0, cors_1.default)()); // CORS support
+app.use((0, morgan_1.default)('dev')); // Request logging
+app.use(express_1.default.json()); // Parse JSON requests
+app.use(express_1.default.urlencoded({ extended: true })); // Parse URL-encoded requests
 // Serve static files from 'public' directory
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express_1.default.static(path_1.default.join(__dirname, '../public')));
 // API routes
-app.use('/api', routes);
+app.use('/api', routes_1.default);
 // Home route
 app.get('/', (req, res) => {
     res.json({
-        message: 'Express Backend API',
+        message: 'Judy AI API',
         status: 'running'
     });
 });
-// Error handling
-app.use(notFoundHandler); // 404 handler
-app.use(errorHandler); // Global error handler
-module.exports = app;
+// Eğer notFoundHandler yoksa, aşağıdaki satırı yorum satırı yapabilirsin.
+// app.use(notFoundHandler);
+app.use(errorHandler_1.default); // Global error handler
+exports.default = app;

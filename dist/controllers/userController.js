@@ -1,7 +1,5 @@
 "use strict";
-/**
- * User controller - handles user-related business logic
- */
+Object.defineProperty(exports, "__esModule", { value: true });
 const users = [
     { id: '1', name: 'John Doe', email: 'john@example.com' },
     { id: '2', name: 'Jane Smith', email: 'jane@example.com' }
@@ -81,7 +79,7 @@ const deleteUser = (req, res, next) => {
         data: deletedUser
     });
 };
-module.exports = {
+exports.default = {
     getAllUsers,
     getUserById,
     createUser,
