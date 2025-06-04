@@ -102,7 +102,7 @@ const deleteUser = (req: Request, res: Response, next: NextFunction) => {
     success: true,
     data: deletedUser
   });
-};
+};  
 
 export default {
   getAllUsers,

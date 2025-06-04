@@ -31,7 +31,7 @@ app.use('/api', routes);
 // Home route
 app.get('/', (req: Request, res: Response) => {
   res.json({
-    message: 'Express Backend API',
+    message: 'Judy AI API',
     status: 'running'
   });
 });
