@@ -28,6 +28,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 // API routes
 app.use('/api', routes);
 
+
 // Home route
 app.get('/', (req: Request, res: Response) => {
   res.json({
