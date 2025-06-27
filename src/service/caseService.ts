@@ -1,3 +1,4 @@
+import { CaseStatus } from '../enums/case';
 import supabase from '../utils/supabaseClient';
 
 export async function getWaitingForAnalysisCases() {
@@ -15,6 +16,33 @@ export async function getWaitingForAnalysisCases() {
     return data;
 }
 
+export async function getWaitingForProsecutorCases() {
+    const { data, error } = await supabase
+        .from('cases')
+        .select('*')
+        .eq('status', CaseStatus.WAITING_FOR_PROSECUTOR)
+        .limit(1)
+        .single();
+
+
+    if (error) {
+        throw error;
+    }
+    return data;
+}
+
+export async function getCaseById(caseId: string) {
+    const { data, error } = await supabase
+        .from('cases')
+        .select('*')
+        .eq('id', caseId)
+        .single();
+
+    if (error) {
+        throw error;
+    }
+    return data;
+}
 
 
 
@@ -121,6 +149,22 @@ export async function getAnswer(questionId: string, participantId: string) {
     }
     return data;
 }
+
+
+//get case_details with case_id
+export async function getParticipantIdWithCaseId(caseId: string) {
+    const { data, error } = await supabase
+        .from('case_details')
+        .select('participant_id')
+        .eq('case_id', caseId)
+
+    if (error) {
+        throw error;
+    }
+    return data;
+}
+
+
 
 
 // get answer from case_answers with question_id
